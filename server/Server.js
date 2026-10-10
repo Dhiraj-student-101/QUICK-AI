@@ -4,7 +4,7 @@ import 'dotenv/config'
 console.log('Secret Key:', process.env.CLERK_SECRET_KEY)
 import { clerkMiddleware } from '@clerk/express'
 import aiRouter from './routes/aiRoutes.js'
-import connectCloudinary from "./configs/Cloudinary.js";
+import connectCloudinary from "./configs/cloudinary.js";
 import userRouter from './routes/userRoute.js'
 
 const app = express()
