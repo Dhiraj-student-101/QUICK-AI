@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Sparkles, Edit, Copy, Check, Loader2 } from 'lucide-react'
 import axios from 'axios'
-import { useAuth } from '@clerk/clerk-react'
+import { useAuth, useUser, useClerk } from '@clerk/clerk-react'
 import Markdown from 'react-markdown'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
@@ -22,9 +22,16 @@ const WriteArticle = () => {
   const [error, setError] = useState('')
 
   const { getToken } = useAuth()
+  const { isSignedIn } = useUser()
+  const { openSignIn } = useClerk()
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
+
+    // 🔥 AGAR USER LOGIN NAHI HAI, TOH DIRECT LOGIN POPUP OPEN KAR DO:
+    if (!isSignedIn) {
+      return openSignIn()
+    }
 
     if (!input.trim()) return
 

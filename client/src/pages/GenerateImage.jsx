@@ -1,7 +1,7 @@
+import { useUser, useClerk, useAuth } from '@clerk/clerk-react'
 import React, { useState } from 'react'
 import { Sparkles, Image as ImageIcon, Download } from 'lucide-react'
 import axios from 'axios'
-import { useAuth } from '@clerk/clerk-react'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
@@ -22,10 +22,17 @@ const GenerateImages = () => {
   const [image, setImage] = useState('')
   const [error, setError] = useState('')
 
+  const { isSignedIn } = useUser()
+  const { openSignIn } = useClerk()
   const { getToken } = useAuth()
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
+
+    // 🔥 AGAR USER LOGIN NAHI HAI, TOH DIRECT LOGIN POPUP OPEN KAR DO:
+    if (!isSignedIn) {
+      return openSignIn()
+    }
 
     if (!input.trim()) return
 
