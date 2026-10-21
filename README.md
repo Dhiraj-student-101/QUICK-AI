@@ -42,25 +42,40 @@ Ensure Docker Desktop is running, then execute:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/<your-username>/quick-ai.git
+git clone https://github.com/Dhiraj-student-101/quick-ai.git
 cd quick-ai
 
 # 2. Start the full application stack
 docker compose up --build
 ```
-## Manual Setup
+
+- **Frontend:** [http://localhost:5173](http://localhost:5173)
+- **Backend:** [http://localhost:5000](http://localhost:5000)
+
+---
+
+### Method 2: Manual Local Setup
+
+```bash
 # Backend Setup
 cd server
 npm install
-nodemon server.js
+npm run dev
 
-# Frontend Setup 
+# Frontend Setup (in a separate terminal)
 cd client
 npm install
 npm run dev
+```
 
+---
 
-## Environment Configuration ##
+## ⚙️ Environment Configuration
+
+Create a `.env` file in each service folder:
+
+**`server/.env`**
+```env
 DATABASE_URL=your_neon_postgres_url
 CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
@@ -69,13 +84,21 @@ CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_key
 CLOUDINARY_API_SECRET=your_cloudinary_secret
 PORT=5000
+```
 
-client/.env
+**`client/.env`**
+```env
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 VITE_BASE_URL=http://localhost:5000
+```
 
-## Database Setup ##
+---
+
+## 🗄️ Database Setup
+
 Run this schema query inside your Neon PostgreSQL SQL editor:
+
+```sql
 CREATE TABLE "Creation" (
   id SERIAL PRIMARY KEY,
   "userId" TEXT NOT NULL,
@@ -87,9 +110,12 @@ CREATE TABLE "Creation" (
   "createdAt" TIMESTAMPTZ DEFAULT NOW(),
   "updatedAt" TIMESTAMPTZ DEFAULT NOW()
 );
+```
 
-👨‍💻 Author
+---
 
-Dhiraj Kumar
-Github- github.com/Dhiraj-student-101
-Linkedin-linkedin.com/in/dhiraj-kumar
+## 👨‍💻 Author
+
+**Dhiraj Kumar**  
+- **GitHub:** [Dhiraj-student-101](https://github.com/Dhiraj-student-101)  
+- **LinkedIn:** [dhiraj-kumar](https://linkedin.com/in/dhiraj-kumar)
